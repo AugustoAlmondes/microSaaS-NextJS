@@ -23,7 +23,7 @@ export default async function Me() {
       <section
         className="w-full flex lg:flex-row flex-col lg:items-center mx-auto bg-zinc-900 rounded-md p-4 gap-2"
       >
-        <UrlPreview/>
+        <UrlPreview username={userData.username}/>
       </section>
 
 

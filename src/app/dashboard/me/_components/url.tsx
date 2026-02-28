@@ -2,10 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { createUsername } from "../_actions/create-username";
 import { useState } from "react";
+import Link from "next/link";
+import { Link2 } from "lucide-react";
 
-export function UrlPreview() {
+export function UrlPreview({ username: slug }: { username: string | null }) {
 
     const [error, setError] = useState<null | string>(null);
+    const [username, setUsername] = useState(slug);
 
     async function submitAction(formData: FormData) {
 
@@ -21,6 +24,30 @@ export function UrlPreview() {
             setError(response.error)
             return
         }
+
+        if (response.data) {
+            setUsername(response.data);
+        }
+    }
+
+    if (!!username) {
+        return (
+            <div className="flex items-center flex-1 p-2 justify-between text-gray-100">
+                <div className="flex flex-col items-start md:flex-row md:items-center justify-center gap-2">
+                    <h3 className="font-bold text-lgjj">Sua URL:</h3>
+                    <Link target="_blank" href={`${process.env.NEXT_PUBLIC_HOST_URL}/creator/${username}`}>
+                        {process.env.NEXT_PUBLIC_HOST_URL}/creator/{username}
+                    </Link>
+                </div>
+
+                <Link
+                    className="bg-blue-500 px-4 py-1 rounded-md"
+                    href={`${process.env.NEXT_PUBLIC_HOST_URL}/creator/${username}`}
+                    target="_blank">
+                    <Link2 className="w-5 h-5 text-white cursor-pointer" />
+                </Link>
+            </div>
+        )
     }
 
     return (

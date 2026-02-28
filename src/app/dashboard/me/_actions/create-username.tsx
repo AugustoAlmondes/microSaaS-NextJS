@@ -58,7 +58,7 @@ export async function createUsername(data: CreateUsernameFormData) {
         })
 
         return {
-            data: "Username criado",
+            data: slug,
             error: null
         }
 
